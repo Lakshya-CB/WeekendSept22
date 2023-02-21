@@ -1,5 +1,7 @@
 package Lec_33_OOPs2;
 
+import java.util.Comparator;
+
 public class Gen_1 {
 	public static void main(String[] args) {
 		Student[] arr = new Student[5];
@@ -10,7 +12,8 @@ public class Gen_1 {
 		arr[4] = new Student("E", 5);
 
 		print(arr);
-		sort(arr);
+//		sort(arr);
+		sort(arr,new naaameCom());
 		print(arr);
 
 	}
@@ -35,6 +38,7 @@ public class Gen_1 {
 	public static <T extends Comparable<T>> void sort(T[] arr) {
 		for (int cnt = 1; cnt < arr.length; cnt++) {
 			for (int i = 0; i <= arr.length - 2; i++) {
+//				arr[i].
 				if (arr[i].compareTo(arr[i + 1]) > 0) {
 //				if (arr[i].Age - arr[i + 1].Age > 0) {
 					T temp = arr[i];
@@ -44,12 +48,25 @@ public class Gen_1 {
 			}
 		}
 	}
-	public static <T> sort(T[] arr, comparing_fn){
+
+	static class naaameCom implements Comparator<Student> {
+
+		@Override
+		public int compare(Student o1, Student o2) {
+			// TODO Auto-generated method stub
+//			o1-o2
+			
+			return o1.Name.compareTo(o2.Name);
+		}
+
+	}
+
+	public static <T> void sort(T[] arr, Comparator<T> comp) {
 		for (int cnt = 1; cnt < arr.length; cnt++) {
 			for (int i = 0; i <= arr.length - 2; i++) {
-				if(comparing_fn(arr[i],arr[i+1])>0) {
-//				if (arr[i].compareTo(arr[i + 1]) > 0) {
-//				if (arr[i].Age - arr[i + 1].Age > 0) {
+
+//				A-B
+				if (comp.compare(arr[i], arr[i + 1]) > 0) {
 					T temp = arr[i];
 					arr[i] = arr[i + 1];
 					arr[i + 1] = temp;
