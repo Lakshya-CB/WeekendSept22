@@ -46,4 +46,22 @@ public class Basic {
 		}
 		return dp[num];
 	}
+	public static int fiboBUSE(int num) {
+//		int[] dp = new int[num + 1];
+		int curr = 0;
+		int prev2 = 0;
+		int prev1 = 1;
+		for (int n = 2; n <= num; n++) {
+//			dp[n] = fibo(n)
+			int sp1 = prev1;
+			int sp2 = prev2;
+//			fibo(n) = sp1+sp2;
+			curr = sp1 + sp2;
+			
+			prev2 = prev1;
+			prev1= curr;
+
+		}
+		return curr;
+	}
 }

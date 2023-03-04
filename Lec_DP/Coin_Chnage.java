@@ -34,27 +34,6 @@ public class Coin_Chnage {
 		return sp1 + sp2;
 	}
 
-	public static int BU(int[] coins, int Amount) {
-		int[][] dp = new int[coins.length + 1][1000];
-		for (int idx = coins.length - 1; idx >= 0; idx--) {
-
-			for (int A = 0; A <= Amount; A++) {
-				if (A == 0) {
-					dp[idx][A] = 1;
-					continue;
-				}
-
-//				dp[idx][A]
-				int sp1 = 0;
-				if (A - coins[idx] >= 0) {
-					sp1 = dp[idx][A - coins[idx]];
-				}
-				int sp2 = dp[idx + 1][A];
-				dp[idx][A] = sp1 + sp2;
-			}
-		}
-		return dp[0][Amount];
-	}
 //	public static void main (String[] args) {
 //    	Scanner scn = new Scanner(System.in);
 //    	int n = scn.nextInt();
@@ -86,7 +65,25 @@ public class Coin_Chnage {
 		}
 		return dp[0][Amount];
 	}
+	public static int BUSE(int[] coins, int Amount) {
+		int[][] dp = new int[2][Amount+1];
+		for (int idx = coins.length - 1; idx >= 0; idx--) {
+			for (int A = 0; A <= Amount; A++) {
+				if (A == 0) {
+					dp[0][A] = 1;
+					continue;
+				}
+				int sp1 = 0;
+				if (A - coins[idx] >= 0) {
+					sp1 = dp[0][A - coins[idx]];
+				}
+				int sp2 = dp[1][A];
+				dp[0][A] = sp1 + sp2;
+			}
+			dp[1] = dp[0];
+			dp[0] = new int[Amount+1];
+		}
+		return dp[1][Amount];
+	}
 }
 
-
-}

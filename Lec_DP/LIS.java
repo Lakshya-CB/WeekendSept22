@@ -51,29 +51,31 @@ public class LIS {
 
 		return Math.max(sp1, sp2);
 	}
-	 public int lengthOfLIS(int[] arr) {
-	        ArrayList<Integer> AL = new ArrayList<>();
-	        for(int ali : arr){
-	            if(AL.isEmpty() || ali>AL.get(AL.size()-1)){
-	                AL.add(ali);
-	            }else{
-	                int s = 0;
-	                int e = AL.size()-1;
-	                int ans =-1;
-	                while(s<=e){
-	                    int mid = (s+e)/2;
-	                    if(AL.get(mid)>=ali){
-	                        ans = mid;
-	                        e=mid-1;
-	                    }else{
-	                        s = mid+1;
-	                    }
-	                }
-	                AL.set(ans,ali);
-	            }
-	        }
-	        return AL.size();
+
+	public int lengthOfLIS(int[] arr) {
+		ArrayList<Integer> AL = new ArrayList<>();
+		for (int ali : arr) {
+			if (AL.isEmpty() || ali > AL.get(AL.size() - 1)) {
+				AL.add(ali);
+			} else {
+				int s = 0;
+				int e = AL.size() - 1;
+				int ans = -1;
+				while (s <= e) {
+					int mid = (s + e) / 2;
+					if (AL.get(mid) >= ali) {
+						ans = mid;
+						e = mid - 1;
+					} else {
+						s = mid + 1;
+					}
+				}
+				AL.set(ans, ali);
+			}
 		}
+		return AL.size();
+	}
+
 	public static int BU(int[] arr) {
 		int[][] dp = new int[arr.length + 1][arr.length + 1];
 		for (int prev = arr.length - 1; prev >= -1; prev--) {
